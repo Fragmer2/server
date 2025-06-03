@@ -1,59 +1,160 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="assets\css\style.css">
-	<link rel="stylesheet" href="assets\css\mobailodapt.css">
-	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
-	<title>Minecrafter | Donate</title>
-	<link rel="shortcut icon" href="C:\Users\Olga_пк\Desktop\Minecrafter\assets\images\diamond.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BoDa | Донат</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/images/diamond.png">
+    <style>
+        .donate-block {
+            background: rgba(0,0,0,0.8);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+            padding: 36px 28px;
+            margin: 80px auto 40px auto;
+            max-width: 600px;
+            color: #fff;
+            font-family: 'Rubik', 'Ubuntu', sans-serif;
+        }
+        .donate-block h1 {
+            text-align: center;
+            color: #ffd77a;
+            margin-bottom: 28px;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .donate-list {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            margin: 30px 0;
+        }
+        .donate-item {
+            display: flex;
+            align-items: center;
+            background: rgba(40,40,40,0.85);
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            justify-content: space-between;
+        }
+        .donate-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .donate-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #ffd77a;
+            color: #23272a;
+            border-radius: 8px;
+            padding: 6px 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            margin-left: 16px;
+        }
+        /* Майнкрафт цвета */
+        .mc-green { color: #55ff55; }
+        .mc-red { color: #ff5555; }
+        .mc-darkred { color: #aa0000; }
+        .mc-gold { color: #ffaa00; }
+        .mc-purple { color: #aa00aa; }
+        /* Кнопка оплатить (пока скрыта/неактивна) */
+        .donate-btn {
+            display: inline-block;
+            margin-left: 18px;
+            padding: 8px 22px;
+            background: #23272a;
+            color: #ffd77a;
+            border: 2px solid #ffd77a;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transition: background 0.2s, color 0.2s;
+        }
+        @media (max-width: 600px) {
+            .donate-block {
+                padding: 18px 4vw;
+                font-size: 1rem;
+            }
+            .donate-block h1 {
+                font-size: 1.2rem;
+            }
+            .donate-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .donate-price, .donate-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-	
-	
-<body text="white">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8FZM9R"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-	
-	<header class="header">
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BRYSYCW233"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BRYSYCW233');
-</script>
-		
-		<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P8FZM9R');</script>
-<!-- End Google Tag Manager -->
-    
-		<div class="container">
-			<div class="header__inner">
-				<div class="header__logo"><a class="main" href="index.html">Minecrafter</a></div>
-				
-				</nav>
-			</div>
-		</div>
-	</header>
-	
-	
-<div class="intro__5">
-	<div class="container">
-		<div class="intro__inner">
-            <h1><a class="main">WebMoney - Z270031896517</a></h1>
-			<h1><a class="main">Card - 5375 4114 1278 0277</a></h1>
-		</div>
-	</div>
-</div>
-	
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo"><a class="main" href="index.html">BoDa</a></div>
+                <nav class="nav">
+                    <a class="nav__link" href="contact.html">Контакты</a>
+                    <a class="nav__link donate-link" href="donate.html">Донат</a>
+                    <a class="nav__link" href="developer.html">Разработчик</a>
+                    <a class="nav__link" href="ip.html">IP сервера</a>
+                    <a class="nav__link" href="rules.html">Правила</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="intro" style="min-height:auto; padding-top:120px;">
+        <div class="container">
+            <div class="donate-block">
+                <h1>Донат-привилегии</h1>
+                <p style="text-align:center; margin-bottom:24px;">
+                    Поддержи сервер и получи уникальные возможности!<br>
+                    <span style="color:#ffd77a;">Скоро появится онлайн-оплата.</span>
+                </p>
+                <div class="donate-list">
+                    <div class="donate-item">
+                        <span class="donate-name mc-green">[Hunter]</span>
+                        <span class="donate-price">$0.99</span>
+                        <span class="donate-btn" title="Скоро!">Оплатить</span>
+                    </div>
+                    <div class="donate-item">
+                        <span class="donate-name mc-red">[Raider]</span>
+                        <span class="donate-price">$2.49</span>
+                        <span class="donate-btn" title="Скоро!">Оплатить</span>
+                    </div>
+                    <div class="donate-item">
+                        <span class="donate-name mc-darkred">[Destroyer]</span>
+                        <span class="donate-price">$4.99</span>
+                        <span class="donate-btn" title="Скоро!">Оплатить</span>
+                    </div>
+                    <div class="donate-item">
+                        <span class="donate-name mc-gold">[Lord]</span>
+                        <span class="donate-price">$6.99</span>
+                        <span class="donate-btn" title="Скоро!">Оплатить</span>
+                    </div>
+                    <div class="donate-item">
+                        <span class="donate-name mc-purple">[Overlord]</span>
+                        <span class="donate-price">$9.99</span>
+                        <span class="donate-btn" title="Скоро!">Оплатить</span>
+                    </div>
+                </div>
+                <p style="text-align:center; margin-top:30px; color:#ffd77a;">
+                    После оплаты напиши в Discord для получения привилегий.<br>
+                    <span style="color:#fff;">Спасибо за поддержку!</span>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,29 +1,20 @@
-@media only screen and (max-width: 1200px) {
-    .progmist__link {
-        position: absolute; right: 860px; top: 670px;
+@media (max-width: 700px) {
+    .header__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
     }
-}
-
-
-@media only screen and (max-width: 992px) {
-    .progmist__link {
-        position: absolute; right: 850px; top: 645px;
+    .nav {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
     }
-}
-
-
-@media only screen and (max-width: 768px) {
-    .progmist__link {
-        position: absolute; right: 820px; top: 1490px;
+    .intro__inner {
+        padding: 18px 6px;
     }
-}
-
-
-@media only screen and (max-width: 576px) {
-    
-}
-
-
-@media only screen and (max-width: 320px) {
-    
+    .btn {
+        width: 100%;
+        margin: 10px 0 0 0;
+        font-size: 1rem;
+    }
 }

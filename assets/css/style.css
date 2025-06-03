@@ -1,485 +1,185 @@
-/*адаптация под мобилы*/
-
-
-
-
-
-
+/* Основные стили */
 body {
-	margin: 0;
-	font-family: 'Mochiy Pop P One', sans-serif;
-	
-	font-size: 15px;
-	line-height: 1.6;
-	color: #333;
+    margin: 0;
+    font-family: 'Rubik', 'Ubuntu', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+    background: #181a1b;
 }
 
 *,
 *:before,
-
 *:after {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0;
+    margin: 0;
 }
 
-/*Container*/
 .container {
-	width: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
-
-/*Intro*/
-.intro {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/bunun.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-.intro__2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/home.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__3 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/fonc4k.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__4 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/mizunoscraft.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__5 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/domho.jfif") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__6 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/Chezzz.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__7 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/desktopw.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-.intro__8 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	
-	background:
-	url("../images/Bezz.png") center no-repeat;
-	-webkit-background-size: cover;
-	background-size: cover;
-}
-
-
-
-	
-.intro__inner {
-	weight: 100%;
-	max-width: 880px;
-	margin: 0 auto;
-	text-align: center;
-	color: rgb(255, 255, 255);
-}
-
-
-
 
 /* Header */
 .header {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 1000;
-	
+    background: rgba(20, 20, 20, 0.85);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .header__inner {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
 }
 
-
-
-.header__logo {
-	display: inline-block;
-	vertical-align: top;
-	margin: 0 15px;
-	position: relative;
+.header__logo .main {
+    font-family: 'Rubik', 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffd77a;
+    text-decoration: none;
+    text-shadow: 2px 2px 8px #000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
 }
+
 
 
 .nav {
-	font-size: 14px;
-	text-transform: uppercase;
-	position: absolute; right: 10px; top: 10px;
+    display: flex;
+    gap: 18px;
 }
 
 .nav__link {
-	display: inline-block;
-	vertical-align: top;
-	margin: 0 15px;
-	position: relative;
-	
-	color: #ffffffce;
-	text-decoration: none;
-	
-	transition: color .2s linear;
-
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+    font-size: 1rem;
 }
 
-.nav__link:after {
-	content: "";
-	display: block;
-	width: 100%;
-	height: 2px;
-	
-	background-color: rgb(250, 212, 142);
-	opacity: 0;
-	
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1;
-	transition: opacity .2s linear;
+.nav__link:hover,
+.donate-link {
+    background: #ffd77a;
+    color: #181a1b;
 }
 
-
-.nav__link:hover {
-	color: rgb(250, 212, 142);
+/* Intro section */
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url("../images/bunun.png") center/cover no-repeat;
+    text-align: center;
+    padding-top: 80px;
 }
 
-
-
-.nav__link:hover:after {
-	opacity: 1;
+.intro__inner {
+    background: rgba(0,0,0,0.55);
+    border-radius: 20px;
+    padding: 48px 28px 36px 28px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    max-width: 480px;
+    margin: 0 auto;
 }
 
-
-
-/*Button*/
-.btn {
-	display:inline-block;
-	vertical-align: top;
-	padding: 10px 15px;
-	
-	border: 3px solid rgb(255, 255, 255);
-	
-	font-size: 17px;
-	font-weight: 700;
-	color: rgb(255, 255, 255);
-	text-transform: uppercase;
-	text-decoration: none;
-	text-align: center;
-	transition: opacity .2s linear;
+.intro__inner h1 {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+    color: #ffd77a;
+    text-shadow: 2px 2px 8px #000;
 }
 
-
-
-.btn:hover {
-	background-color: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
-	opacity: 1;
+.intro__inner p {
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+    color: #fff;
+    text-shadow: 1px 1px 6px #000;
 }
 
-
-
-/*Slider*/
-.slider {
-	display: flex;
+/* Кнопки */
+.btn,
+.donate-btn {
+    display: inline-block;
+    margin: 12px 8px 0 8px;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #f7b733 0%, #fc4a1a 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.22);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-
-
-.slider__item {
-	weight: 24%;
+.btn:hover,
+.donate-btn:hover {
+    background: linear-gradient(90deg, #ffd77a 0%, #fc4a1a 100%);
+    color: #181a1b;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.32);
 }
 
-
-
-.main {
-	text-decoration: none;
-	color: #fff;
-	font-size: 30px;
-	font-weight: 700;
-	color: white;
-	text-shadow: black 2px 2px;
+/* Мобильная адаптация */
+@media (max-width: 900px) {
+    .header__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    .nav {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-top: 8px;
+    }
+    .intro__inner {
+        padding: 22px 8px;
+        max-width: 98vw;
+    }
+    .btn, .donate-btn {
+        width: 100%;
+        margin: 10px 0 0 0;
+        font-size: 1rem;
+    }
 }
 
-
-
-/*mine__hub*/
-.mine__hub {
-	position: absolute; right: 1170px; top: 10px;
+@media (max-width: 600px) {
+    .header__logo .main {
+        font-size: 1.3rem;
+    }
+    .intro__inner h1 {
+        font-size: 1.4rem;
+    }
+    .intro__inner {
+        padding: 16px 3vw;
+    }
 }
 
-
-
-/*soderj*/
-.soderj {
-	text-decoration: none;
-	color: #fff;
-	font-size: 25px;
-	font-weight: 700;
-	color: white;
-	text-shadow: black 2px 2px;
+/* Дополнительные стили для красоты */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #23272a;
 }
-
-
-
-/*hondor*/
-.hondor {
-	font-size: 18px;
-	text-shadow: black 3px 2px;
-}
-
-
-
-/*progmist*/
-.progmist__link {
-	display: inline-block;
-	vertical-align: top;
-	margin: 0 15px;
-	position: relative;
-	
-	color: #ffffffce;
-	text-decoration: none;
-	
-	transition: color .2s linear;
-
-	font-size: 20px;
-	text-transform: uppercase;
-	position: absolute; right: 1200px; top: 570px;
-}
-
-.progmist__link:after {
-	content: "";
-	display: block;
-	width: 100%;
-	height: 2px;
-	
-	background-color: rgb(250, 212, 142);
-	opacity: 0;
-	
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1;
-	transition: opacity .2s linear;
-}
-
-
-.progmist__link:hover {
-	color: rgb(250, 212, 142);
-}
-
-
-
-.progmist__link:hover:after {
-	opacity: 1;
-}
-
-
-
-/*Rules*/
-.rules {
-	position: absolute; right: 1070px; top: 40px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules2 {
-	position: absolute; right: 720px; top: 40px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules3 {
-	position: absolute; right: 370px; top: 40px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules4 {
-	position: absolute; right: 30px; top: 40px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules5 {
-	position: absolute; right: 1120px; top: 650px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules6 {
-	position: absolute; right: 750px; top: 650px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules7 {
-	position: absolute; right: 370px; top: 650px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules8 {
-	position: absolute; right: 40px; top: 650px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules9 {
-	position: absolute; right: 1060px; top: 1250px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules10 {
-	position: absolute; right: 500px; top: 1250px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-.rules11 {
-	position: absolute; right: 100px; top: 1250px;
-	text-align: left;
-	margin: 15px;
-	text-shadow: black 2px 2px;
-}
-
-
-
-/*imgrules*/
-.rules_img {
-	width: 100%;
-	height: 100%;
-	background-image: url(C:\Users\Olga_пк\Desktop\Minecrafter\assets\imagesChezzz.png);
-	background-size: 100% 100%;
-	background-position: center;
-}
-
-
-
-.LolTwo {
-	color: #e6e6fa;
-	text-shadow: rgb(0, 0, 0) 3px 3px;
-}
-
-
-
-.Lol {
-	color: #e66b6b;
-	text-shadow: rgb(0, 0, 0) 3px 3px;
+::-webkit-scrollbar-thumb {
+    background: #ffd77a;
+    border-radius: 4px;
 }

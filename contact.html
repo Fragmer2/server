@@ -4,106 +4,618 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BoDa | Контакты</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/Redstone.png">
-    <!-- Иконки Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-size: 16px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #111111;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --accent-gold: #ffd700;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-intense: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --glow-gold: 0 0 30px rgba(255, 215, 0, 0.3);
+            --glow-purple: 0 0 30px rgba(139, 92, 246, 0.3);
+            --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.3);
+            --glow-pink: 0 0 30px rgba(236, 72, 153, 0.3);
+            --glow-green: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #fff;
-            background: #181a1b;
+            overflow-x: hidden;
             min-height: 100vh;
         }
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-weight: 700;
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 25% 75%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
         }
-        .contacts-block {
-            background: rgba(0,0,0,0.8);
-            border-radius: 18px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
-            padding: 36px 28px;
-            margin: 80px auto 40px auto;
-            max-width: 500px;
-            color: #fff;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
-        .contacts-block h1 {
-            text-align: center;
-            color: #ffd77a;
-            margin-bottom: 28px;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatAround 20s linear infinite;
         }
-        .contact-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent-pink), var(--accent-purple));
+            border-radius: 50%;
+            top: 15%;
+            left: 10%;
+            animation-delay: -3s;
         }
-        .contact-list li {
+        
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-green));
+            transform: rotate(45deg);
+            top: 70%;
+            right: 20%;
+            animation-delay: -8s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-orange));
+            border-radius: 20px;
+            bottom: 40%;
+            left: 80%;
+            animation-delay: -12s;
+        }
+        
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(80px, -40px) rotate(90deg); }
+            50% { transform: translate(-40px, -80px) rotate(180deg); }
+            75% { transform: translate(-80px, 40px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        /* Matrix-style effect */
+        .digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .rain-drop {
+            position: absolute;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            animation: rain 4s linear infinite;
+            opacity: 0.2;
+        }
+        
+        @keyframes rain {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header__inner {
             display: flex;
             align-items: center;
-            background: rgba(40,40,40,0.85);
-            border-radius: 10px;
-            margin-bottom: 16px;
-            padding: 14px 18px;
-            font-size: 1.1rem;
-            transition: background 0.2s, color 0.2s;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+            justify-content: space-between;
         }
-        .contact-list li:hover {
-            background: #ffd77a;
-            color: #23272a;
+        
+        .header__logo a {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow-gold);
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
-        .contact-list i {
-            font-size: 1.3em;
-            margin-right: 14px;
-            color: #ffd77a;
-            min-width: 26px;
-            text-align: center;
-            transition: color 0.2s;
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
         }
-        .contact-list li:hover i {
-            color: #23272a;
-        }
-        .contact-list a {
-            color: inherit;
+        
+        .nav__link {
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
-        .contact-list li:hover a {
-            color: #23272a;
+        
+        .nav__link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
         }
-        @media (max-width: 600px) {
-            .contacts-block {
-                padding: 18px 4vw;
-                font-size: 1rem;
+        
+        .nav__link:hover::before {
+            left: 100%;
+        }
+        
+        .nav__link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .donate-link {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)) !important;
+            color: white !important;
+            box-shadow: var(--glow-purple);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contacts-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid var(--border-subtle);
+            padding: 4rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-intense);
+            position: relative;
+            overflow: hidden;
+            animation: containerEntrance 1.2s ease-out;
+        }
+        
+        @keyframes containerEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
             }
-            .contacts-block h1 {
-                font-size: 1.2rem;
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
-            .contact-list li {
-                font-size: 1rem;
-                padding: 10px 8px;
+        }
+        
+        .contacts-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple), var(--accent-cyan), var(--accent-pink));
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .contacts-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+            text-shadow: var(--glow-gold);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        /* Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+        
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+        .contact-card:nth-child(4) { animation-delay: 0.4s; }
+        .contact-card:nth-child(5) { animation-delay: 0.5s; }
+        .contact-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--platform-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-intense), var(--platform-glow);
+            border-color: var(--platform-color);
+        }
+        
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            background: var(--platform-color);
+            box-shadow: var(--platform-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: iconRotate 3s linear infinite;
+        }
+        
+        @keyframes iconRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .contact-icon i {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--platform-color);
+            margin-bottom: 0.25rem;
+        }
+        
+        .contact-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .contact-link {
+            display: block;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+        
+        .contact-link:hover {
+            color: var(--platform-color);
+            transform: translateX(5px);
+        }
+        
+        /* Platform-specific colors */
+        .instagram {
+            --platform-color: #e4405f;
+            --platform-glow: 0 0 20px rgba(228, 64, 95, 0.4);
+        }
+        
+        .youtube {
+            --platform-color: #ff0000;
+            --platform-glow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+        
+        .twitter {
+            --platform-color: #1da1f2;
+            --platform-glow: 0 0 20px rgba(29, 161, 242, 0.4);
+        }
+        
+        .discord {
+            --platform-color: #5865f2;
+            --platform-glow: 0 0 20px rgba(88, 101, 242, 0.4);
+        }
+        
+        .reddit {
+            --platform-color: #ff4500;
+            --platform-glow: 0 0 20px rgba(255, 69, 0, 0.4);
+        }
+        
+        .telegram {
+            --platform-color: #0088cc;
+            --platform-glow: 0 0 20px rgba(0, 136, 204, 0.4);
+        }
+        
+        /* Copy functionality */
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .copy-btn:hover {
+            background: var(--platform-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        .contacts-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid var(--accent-green);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+        
+        .status-text {
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-intense);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            font-weight: 600;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .contacts-container {
+                padding: 2.5rem 2rem;
+                margin: 0 1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .contact-card {
+                padding: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contacts-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contacts-title {
+                font-size: 2rem;
+            }
+            
+            .contact-header {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+    
+    <!-- Digital Rain Effect -->
+    <div class="digital-rain" id="digitalRain"></div>
+    
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__inner">
-                <div class="header__logo"><a class="main" href="index.html">BoDa</a></div>
+                <div class="header__logo">
+                    <a href="index.html">BoDa</a>
+                </div>
                 <nav class="nav">
                     <a class="nav__link" href="contact.html">Контакты</a>
                     <a class="nav__link donate-link" href="donate.html">Донат</a>
@@ -114,38 +626,474 @@
             </div>
         </div>
     </header>
-    <div class="intro" style="min-height:auto; padding-top:120px;">
+    
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="container">
-            <div class="contacts-block">
-                <h1>Контакты и соцсети</h1>
-                <ul class="contact-list">
-                    <li>
-                        <i class="fab fa-instagram"></i>
-                        <a href="https://www.instagram.com/bogdan_stepantsov/" target="_blank">Instagram: <b>bogdan_stepantsov</b></a>
-                    </li>
-                    <li>
-                        <i class="fab fa-youtube"></i>
-                        <a href="https://www.youtube.com/channel/UC0X_78WkPKT0BJBjBqrepEg" target="_blank">YouTube: <b>Channel BRAE</b></a>
-                    </li>
-                    <li>
-                        <i class="fab fa-twitter"></i>
-                        <a href="https://twitter.com/7TkOAoitQ3FA9dv" target="_blank">Twitter: <b>@7TkOAitQ3FA9dv</b></a>
-                    </li>
-                    <li>
-                        <i class="fab fa-discord"></i>
-                        <span>Discord: <b>Bogdan#6736</b></span>
-                    </li>
-                    <li>
-                        <i class="fab fa-reddit"></i>
-                        <a href="https://www.reddit.com/u/Fragmer2&utm_medium=android_app&utm_surce=share" target="_blank">Reddit: <b>u/fragmer2</b></a>
-                    </li>
-                    <li>
-                        <i class="fab fa-telegram"></i>
-                        <span>Telegram: <b>@bogdan_stepansov</b></span>
-                    </li>
-                </ul>
+            <div class="contacts-container">
+                <h1 class="contacts-title">КОНТАКТЫ</h1>
+                
+                <div class="contact-grid">
+                    <!-- Instagram -->
+                    <div class="contact-card instagram">
+                        <button class="copy-btn" onclick="copyToClipboard('@bogdan_stepantsov')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Instagram</h3>
+                                <p>Личные фото и новости</p>
+                            </div>
+                        </div>
+                        <a href="https://www.instagram.com/bogdan_stepantsov/" target="_blank" class="contact-link">
+                            @bogdan_stepantsov
+                        </a>
+                    </div>
+                    
+                    <!-- YouTube -->
+                    <div class="contact-card youtube">
+                        <button class="copy-btn" onclick="copyToClipboard('Channel BRAE')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>YouTube</h3>
+                                <p>Видео и стримы</p>
+                            </div>
+                        </div>
+                        <a href="https://www.youtube.com/channel/UC0X_78WkPKT0BJBjBqrepEg" target="_blank" class="contact-link">
+                            Channel BRAE
+                        </a>
+                    </div>
+                    
+                    <!-- Twitter -->
+                    <div class="contact-card twitter">
+                        <button class="copy-btn" onclick="copyToClipboard('@7TkOAitQ3FA9dv')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Twitter</h3>
+                                <p>Короткие обновления</p>
+                            </div>
+                        </div>
+                        <a href="https://twitter.com/7TkOAoitQ3FA9dv" target="_blank" class="contact-link">
+                            @7TkOAitQ3FA9dv
+                        </a>
+                    </div>
+                    
+                    <!-- Discord -->
+                    <div class="contact-card discord">
+                        <button class="copy-btn" onclick="copyToClipboard('Bogdan#6736')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Discord</h3>
+                                <p>Прямое общение</p>
+                            </div>
+                        </div>
+                        <span class="contact-link">Bogdan#6736</span>
+                    </div>
+                    
+                    <!-- Reddit -->
+                    <div class="contact-card reddit">
+                        <button class="copy-btn" onclick="copyToClipboard('u/fragmer2')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-reddit"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Reddit</h3>
+                                <p>Обсуждения и посты</p>
+                            </div>
+                        </div>
+                        <a href="https://www.reddit.com/u/Fragmer2&utm_medium=android_app&utm_surce=share" target="_blank" class="contact-link">
+                            u/fragmer2
+                        </a>
+                    </div>
+                    
+                    <!-- Telegram -->
+                    <div class="contact-card telegram">
+                        <button class="copy-btn" onclick="copyToClipboard('@bogdan_stepansov')" title="Копировать">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <div class="contact-header">
+                            <div class="contact-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Telegram</h3>
+                                <p>Быстрые сообщения</p>
+                            </div>
+                        </div>
+                        <span class="contact-link">@bogdan_stepansov</span>
+                    </div>
+                </div>
+                
+                <div class="contacts-footer">
+                    <p class="footer-text">Связывайтесь со мной в любое время! Отвечаю быстро 🚀</p>
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span class="status-text">Онлайн и готов к общению</span>
+                    </div>
+                </div>
             </div>
         </div>
+    </main>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        Скопировано в буфер обмена!
     </div>
+    
+    <script>
+        // Create digital rain effect
+        function createDigitalRain() {
+            const rainContainer = document.getElementById('digitalRain');
+            const characters = '01010011011001010110111001100100@#$%&*()[]{}';
+            const columns = Math.floor(window.innerWidth / 15);
+            
+            for (let i = 0; i < columns; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = (i * 15) + 'px';
+                drop.style.animationDelay = Math.random() * 4 + 's';
+                drop.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                drop.textContent = characters[Math.floor(Math.random() * characters.length)];
+                rainContainer.appendChild(drop);
+                
+                // Update character periodically
+                setInterval(() => {
+                    drop.textContent = characters[Math.floor(Math.random() * characters.length)];
+                }, 300);
+            }
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast();
+            });
+        }
+        
+        // Show toast notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Enhanced card hover effects
+        function initCardEffects() {
+            const cards = document.querySelectorAll('.contact-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-12px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+                
+                // Add mouse move parallax effect
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    
+                    card.style.transform = `translateY(-12px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+        
+        // Header scroll effect
+        function initHeaderEffect() {
+            const header = document.querySelector('.header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.background = 'rgba(10, 10, 10, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(10, 10, 10, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+        
+        // Create floating shapes
+        function createFloatingShapes() {
+            const shapesContainer = document.querySelector('.floating-shapes');
+            
+            for (let i = 3; i < 7; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+                
+                const size = Math.random() * 40 + 20;
+                const colors = [
+                    'linear-gradient(45deg, var(--accent-gold), var(--accent-orange))',
+                    'linear-gradient(45deg, var(--accent-purple), var(--accent-pink))',
+                    'linear-gradient(45deg, var(--accent-cyan), var(--accent-green))'
+                ];
+                
+                shape.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation-delay: ${-Math.random() * 20}s;
+                    animation-duration: ${Math.random() * 8 + 12}s;
+                `;
+                
+                shapesContainer.appendChild(shape);
+            }
+        }
+        
+        // Add glitch effect to title
+        function initTextEffects() {
+            const title = document.querySelector('.contacts-title');
+            
+            setInterval(() => {
+                if (Math.random() < 0.03) { // 3% chance
+                    title.style.textShadow = `
+                        2px 0 #ff0000,
+                        -2px 0 #00ffff,
+                        0 0 20px rgba(255, 215, 0, 0.8)
+                    `;
+                    title.style.transform = 'skew(-1deg)';
+                    
+                    setTimeout(() => {
+                        title.style.textShadow = '';
+                        title.style.transform = '';
+                    }, 100);
+                }
+            }, 3000);
+        }
+        
+        // Performance optimization
+        function optimizePerformance() {
+            if (window.innerWidth < 768) {
+                const shapes = document.querySelectorAll('.shape');
+                shapes.forEach((shape, index) => {
+                    if (index > 2) {
+                        shape.style.display = 'none';
+                    }
+                });
+                
+                // Reduce digital rain on mobile
+                const rainDrops = document.querySelectorAll('.rain-drop');
+                rainDrops.forEach((drop, index) => {
+                    if (index % 2 !== 0) {
+                        drop.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
+        // Add ripple effect to buttons
+        function addRippleEffect() {
+            const buttons = document.querySelectorAll('.copy-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = button.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.4);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    button.style.position = 'relative';
+                    button.style.overflow = 'hidden';
+                    button.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        }
+        
+        // Add CSS for ripple animation
+        function addRippleCSS() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    from {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Easter egg - Konami code
+        function initEasterEgg() {
+            let konamiCode = [];
+            const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+            
+            document.addEventListener('keydown', (e) => {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > konamiSequence.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.join(',') === konamiSequence.join(',')) {
+                    // Easter egg: Rainbow mode
+                    document.body.style.filter = 'hue-rotate(0deg)';
+                    let hue = 0;
+                    const rainbowInterval = setInterval(() => {
+                        hue += 5;
+                        document.body.style.filter = `hue-rotate(${hue}deg)`;
+                        if (hue >= 360) {
+                            clearInterval(rainbowInterval);
+                            document.body.style.filter = '';
+                        }
+                    }, 50);
+                    
+                    // Show secret message
+                    const message = document.createElement('div');
+                    message.innerHTML = '🌈 Секретный режим активирован! 🌈';
+                    message.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: linear-gradient(45deg, var(--accent-gold), var(--accent-purple));
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 20px;
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        z-index: 10000;
+                        animation: bounce 0.5s ease-in-out;
+                        box-shadow: var(--shadow-intense);
+                    `;
+                    
+                    document.body.appendChild(message);
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                    
+                    konamiCode = [];
+                }
+            });
+        }
+        
+        // Add bounce animation
+        function addBounceCSS() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes bounce {
+                    0%, 20%, 50%, 80%, 100% {
+                        transform: translate(-50%, -50%) translateY(0);
+                    }
+                    40% {
+                        transform: translate(-50%, -50%) translateY(-30px);
+                    }
+                    60% {
+                        transform: translate(-50%, -50%) translateY(-15px);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            addRippleCSS();
+            addBounceCSS();
+            createDigitalRain();
+            createFloatingShapes();
+            initCardEffects();
+            initHeaderEffect();
+            initTextEffects();
+            addRippleEffect();
+            optimizePerformance();
+            initEasterEgg();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Recreate digital rain on resize
+            const rainContainer = document.getElementById('digitalRain');
+            rainContainer.innerHTML = '';
+            createDigitalRain();
+            optimizePerformance();
+        });
+        
+        // Add visibility change listener
+        document.addEventListener('visibilitychange', () => {
+            const shapes = document.querySelectorAll('.shape');
+            const rainDrops = document.querySelectorAll('.rain-drop');
+            
+            if (document.hidden) {
+                shapes.forEach(shape => shape.style.animationPlayState = 'paused');
+                rainDrops.forEach(drop => drop.style.animationPlayState = 'paused');
+            } else {
+                shapes.forEach(shape => shape.style.animationPlayState = 'running');
+                rainDrops.forEach(drop => drop.style.animationPlayState = 'running');
+            }
+        });
+    </script>
 </body>
 </html>

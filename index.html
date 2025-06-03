@@ -4,190 +4,609 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BoDa | Главная</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/bread.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #fff;
-            background: #181a1b;
-            min-height: 100vh;
-        }
-        *,
-        *:before,
-        *:after {
+            padding: 0;
             box-sizing: border-box;
         }
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-weight: 700;
+        
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #111111;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --accent-gold: #ffd700;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #ff6b35;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-intense: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --glow-gold: 0 0 30px rgba(255, 215, 0, 0.3);
+            --glow-purple: 0 0 30px rgba(139, 92, 246, 0.3);
+            --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.3);
+            --glow-orange: 0 0 30px rgba(255, 107, 53, 0.3);
         }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        /* Header */
-        .header {
-            background: rgba(20, 20, 20, 0.90);
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-gold), var(--accent-purple));
+            border-radius: 4px;
+            box-shadow: var(--glow-gold);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-orange));
+        }
+        
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
         }
+        
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+        
+        /* Background Video/Image Overlay */
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(139, 92, 246, 0.1)),
+                url("assets/images/bunun.png") center/cover no-repeat;
+            filter: blur(1px) brightness(0.4);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
         .header__inner {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 14px 0;
+            justify-content: space-between;
         }
-        .header__logo .main {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffd77a;
+        
+        .header__logo a {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-gold);
             text-decoration: none;
-            text-shadow: 2px 2px 8px #000;
-            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow-gold);
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            transition: color 0.2s;
         }
-        .header__logo .main:hover {
-            color: #fff;
+        
+        .header__logo a:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
         }
+        
         .nav {
             display: flex;
-            gap: 18px;
+            gap: 2rem;
         }
+        
         .nav__link {
-            color: #fff;
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
             font-weight: 500;
-            font-size: 1rem;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
-        .nav__link:hover,
+        
+        .nav__link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav__link:hover::before {
+            left: 100%;
+        }
+        
+        .nav__link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        
         .donate-link {
-            background: #ffd77a;
-            color: #181a1b;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)) !important;
+            color: white !important;
+            box-shadow: var(--glow-purple);
+            font-weight: 600;
         }
-        /* Intro section */
-        .intro {
+        
+        .donate-link:hover {
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        /* Main Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background: url("assets/images/bunun.png") center/cover no-repeat;
             text-align: center;
-            padding-top: 90px;
+            padding: 120px 0 60px;
+            position: relative;
         }
-        .intro__inner {
-            background: rgba(0,0,0,0.60);
-            border-radius: 22px;
-            padding: 54px 32px 40px 32px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.4);
-            max-width: 480px;
+        
+        .hero-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid var(--border-subtle);
+            padding: 4rem 3rem;
+            max-width: 800px;
             margin: 0 auto;
+            box-shadow: var(--shadow-intense);
+            position: relative;
+            overflow: hidden;
+            animation: heroEntrance 1.2s ease-out;
         }
-        .intro__inner h1 {
-            font-size: 2.3rem;
-            margin-bottom: 22px;
-            color: #ffd77a;
-            text-shadow: 2px 2px 8px #000;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+        
+        @keyframes heroEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-        .intro__inner p {
-            font-size: 1.15rem;
-            margin-bottom: 28px;
-            color: #fff;
-            text-shadow: 1px 1px 6px #000;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+        
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple), var(--accent-cyan), var(--accent-orange));
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
         }
-        /* Кнопки */
-        .btn,
-        .donate-btn {
-            display: inline-block;
-            margin: 12px 8px 0 8px;
-            padding: 15px 38px;
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--glow-gold);
+            animation: titlePulse 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Action Buttons */
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
             font-size: 1.1rem;
-            font-weight: bold;
-            color: #fff;
-            background: linear-gradient(90deg, #f7b733 0%, #fc4a1a 100%);
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.22);
-            text-transform: uppercase;
+            font-weight: 700;
             text-decoration: none;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
         }
-        .btn:hover,
-        .donate-btn:hover {
-            background: linear-gradient(90deg, #ffd77a 0%, #fc4a1a 100%);
-            color: #181a1b;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.32);
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
-        /* Мобильная адаптация */
-        @media (max-width: 900px) {
-            .header__inner {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 0;
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: #000;
+            box-shadow: var(--glow-gold);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--glow-orange);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white;
+            box-shadow: var(--glow-purple);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--glow-cyan);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-intense), var(--glow-gold);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: var(--glow-gold);
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
             }
+            
             .nav {
+                display: none;
+            }
+            
+            .hero-content {
+                padding: 2.5rem 2rem;
+                margin: 0 1rem;
+            }
+            
+            .hero-actions {
                 flex-direction: column;
-                gap: 8px;
+                align-items: center;
+            }
+            
+            .btn {
                 width: 100%;
-                margin-top: 8px;
+                max-width: 300px;
+                justify-content: center;
             }
-            .intro__inner {
-                padding: 22px 8px;
-                max-width: 98vw;
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .btn, .donate-btn {
-                width: 100%;
-                margin: 10px 0 0 0;
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .header__logo .main {
-                font-size: 1.3rem;
-            }
-            .intro__inner h1 {
-                font-size: 1.4rem;
-            }
-            .intro__inner {
-                padding: 16px 3vw;
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-            background: #23272a;
+        
+        @media (max-width: 480px) {
+            .header__logo a {
+                font-size: 2rem;
+            }
+            
+            .hero-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #ffd77a;
-            border-radius: 4px;
+        
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Loading Animation */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-gold);
+            border-right: 3px solid var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .page-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-particles" id="particles"></div>
+    </div>
+    
+    <!-- Hero Background -->
+    <div class="hero-bg"></div>
+    
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__inner">
                 <div class="header__logo">
-                    <a class="main" href="index.html">Boda</a>
+                    <a href="index.html">BoDa</a>
                 </div>
                 <nav class="nav">
                     <a class="nav__link" href="contact.html">Контакты</a>
@@ -199,14 +618,470 @@
             </div>
         </div>
     </header>
-    <div class="intro">
-        <div class="container">
-            <div class="intro__inner">
-                <h1>Добро пожаловать на сервер Boda!</h1>
-                <a class="btn" href="ip.html">Начать Играть</a>
-                <a class="btn donate-btn" href="donate.html">Купить Донат</a>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Добро пожаловать на сервер BoDa!</h1>
+                    <p class="hero-subtitle">
+                        Присоединяйся к эпическим приключениям в мире Minecraft!<br>
+                        Уникальные возможности, дружелюбное сообщество и незабываемые моменты ждут тебя.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="ip.html" class="btn btn-primary">
+                            🎮 Начать Играть
+                        </a>
+                        <a href="donate.html" class="btn btn-secondary">
+                            💎 Купить Донат
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Почему выбирают нас?</h2>
+                <p class="section-subtitle animate-on-scroll">Уникальные особенности нашего сервера</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🏰</div>
+                        <h3 class="feature-title">Уникальные Режимы</h3>
+                        <p class="feature-description">
+                            Эксклюзивные игровые режимы, которые вы не найдете больше нигде. 
+                            Постоянные обновления и новый контент.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">👥</div>
+                        <h3 class="feature-title">Дружелюбное Сообщество</h3>
+                        <p class="feature-description">
+                            Активное сообщество игроков, готовых помочь новичкам. 
+                            Регулярные события и турниры.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Высокая Производительность</h3>
+                        <p class="feature-description">
+                            Мощные серверы обеспечивают стабильную работу без лагов. 
+                            99.9% аптайм и быстрая техподдержка.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">Безопасность</h3>
+                        <p class="feature-description">
+                            Надежная защита от читеров и гриферов. 
+                            Справедливые правила и активная модерация.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🎁</div>
+                        <h3 class="feature-title">Награды и Бонусы</h3>
+                        <p class="feature-description">
+                            Ежедневные награды, система достижений и уникальные предметы. 
+                            Щедрые бонусы для активных игроков.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">Кастомные Плагины</h3>
+                        <p class="feature-description">
+                            Собственные разработки и уникальные механики. 
+                            Постоянная работа над улучшением игрового процесса.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Наши Достижения</h2>
+                <div class="stats-grid">
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number" data-count="4">0</span>
+                        <span class="stat-label">Игроков</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number" data-count="99">0</span>
+                        <span class="stat-label">% Аптайм</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number" data-count="1">0</span>
+                        <span class="stat-label">Месяца Онлайн</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number" data-count="1">0</span>
+                        <span class="stat-label">Режимов Игры</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Page Loading
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Scroll animations
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate counters
+                        if (entry.target.classList.contains('stat-item')) {
+                            animateCounter(entry.target.querySelector('.stat-number'));
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            const duration = 2000;
+            const start = performance.now();
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(progress * target);
+                
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+        
+        // Header scroll effect
+        function initHeaderEffect() {
+            const header = document.querySelector('.header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.background = 'rgba(10, 10, 10, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(10, 10, 10, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+                
+                // Hide header on scroll down, show on scroll up
+                if (currentScroll > lastScroll && currentScroll > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+        
+        // Enhanced button effects
+        function initButtonEffects() {
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
+                });
+                
+                // Click ripple effect
+                btn.addEventListener('click', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    btn.style.position = 'relative';
+                    btn.style.overflow = 'hidden';
+                    btn.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        }
+        
+        // Feature cards parallax effect
+        function initParallaxEffect() {
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Dynamic background color based on scroll
+        function initDynamicBackground() {
+            window.addEventListener('scroll', () => {
+                const scrollPercent = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+                const hue = scrollPercent * 60; // From 0 to 60 degrees
+                document.documentElement.style.setProperty('--dynamic-hue', `${hue}deg`);
+            });
+        }
+        
+        // Easter egg - Konami code
+        function initEasterEgg() {
+            let konamiCode = [];
+            const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+            
+            document.addEventListener('keydown', (e) => {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > konamiSequence.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.join(',') === konamiSequence.join(',')) {
+                    // Easter egg: Rainbow mode
+                    document.body.style.filter = 'hue-rotate(0deg)';
+                    let hue = 0;
+                    const rainbowInterval = setInterval(() => {
+                        hue += 5;
+                        document.body.style.filter = `hue-rotate(${hue}deg)`;
+                        if (hue >= 360) {
+                            clearInterval(rainbowInterval);
+                            document.body.style.filter = '';
+                        }
+                    }, 50);
+                    
+                    // Show secret message
+                    const message = document.createElement('div');
+                    message.innerHTML = '🎉 Секретный код активирован! 🎉';
+                    message.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: linear-gradient(45deg, var(--accent-gold), var(--accent-purple));
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 20px;
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        z-index: 10000;
+                        animation: bounce 0.5s ease-in-out;
+                        box-shadow: var(--shadow-intense);
+                    `;
+                    
+                    document.body.appendChild(message);
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                    
+                    konamiCode = [];
+                }
+            });
+        }
+        
+        // Performance optimization
+        function optimizePerformance() {
+            // Throttle scroll events
+            let scrollTimeout;
+            const originalScrollHandler = window.onscroll;
+            
+            window.onscroll = function() {
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                scrollTimeout = setTimeout(() => {
+                    if (originalScrollHandler) {
+                        originalScrollHandler();
+                    }
+                }, 16); // ~60fps
+            };
+            
+            // Lazy load particles on mobile
+            if (window.innerWidth < 768) {
+                const particles = document.querySelectorAll('.particle');
+                particles.forEach((particle, index) => {
+                    if (index > 20) {
+                        particle.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
+        // Add CSS for ripple animation
+        function addRippleCSS() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    from {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+                
+                @keyframes bounce {
+                    0%, 20%, 50%, 80%, 100% {
+                        transform: translate(-50%, -50%) translateY(0);
+                    }
+                    40% {
+                        transform: translate(-50%, -50%) translateY(-30px);
+                    }
+                    60% {
+                        transform: translate(-50%, -50%) translateY(-15px);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Mobile menu toggle (for future implementation)
+        function initMobileMenu() {
+            // This can be extended later for mobile hamburger menu
+            if (window.innerWidth < 768) {
+                console.log('Mobile layout detected');
+                // Add mobile-specific optimizations here
+            }
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            addRippleCSS();
+            createParticles();
+            initScrollAnimations();
+            initHeaderEffect();
+            initButtonEffects();
+            initParallaxEffect();
+            initSmoothScroll();
+            initDynamicBackground();
+            initEasterEgg();
+            initMobileMenu();
+            optimizePerformance();
+        });
+        
+        // Add resize event listener for responsive behavior
+        window.addEventListener('resize', () => {
+            // Recreate particles if screen size changes significantly
+            const currentParticleCount = document.querySelectorAll('.particle').length;
+            const expectedCount = window.innerWidth < 768 ? 30 : 60;
+            
+            if (Math.abs(currentParticleCount - expectedCount) > 10) {
+                document.getElementById('particles').innerHTML = '';
+                createParticles();
+            }
+        });
+        
+        // Add visibility change listener to pause animations when tab is not active
+        document.addEventListener('visibilitychange', () => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                if (document.hidden) {
+                    particle.style.animationPlayState = 'paused';
+                } else {
+                    particle.style.animationPlayState = 'running';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

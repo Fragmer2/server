@@ -4,80 +4,672 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BoDa | Правила</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/images/bookpen.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        .rules-block {
-            background: rgba(0,0,0,0.8);
-            border-radius: 18px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
-            padding: 36px 28px;
-            margin: 80px auto 40px auto;
-            max-width: 800px;
-            color: #fff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .rules-block h1 {
-            text-align: center;
-            color: #ffd77a;
-            margin-bottom: 24px;
-            font-size: 2rem;
-            letter-spacing: 1px;
+        
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #111111;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --accent-gold: #ffd700;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-intense: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --glow-gold: 0 0 30px rgba(255, 215, 0, 0.3);
+            --glow-purple: 0 0 30px rgba(139, 92, 246, 0.3);
+            --glow-cyan: 0 0 30px rgba(6, 182, 212, 0.3);
+            --glow-red: 0 0 30px rgba(239, 68, 68, 0.3);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.12;
+            animation: floatAround 30s linear infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--accent-red), var(--accent-orange));
+            border-radius: 50%;
+            top: 20%;
+            left: 15%;
+            animation-delay: -8s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink));
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            top: 70%;
+            right: 20%;
+            animation-delay: -15s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-orange));
+            border-radius: 30px;
+            bottom: 30%;
+            left: 80%;
+            animation-delay: -22s;
+        }
+        
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -60px) rotate(90deg); }
+            50% { transform: translate(-60px, -120px) rotate(180deg); }
+            75% { transform: translate(-120px, 60px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        /* Warning Lines Effect */
+        .warning-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(239, 68, 68, 0.02) 100px,
+                    rgba(239, 68, 68, 0.02) 102px
+                );
+            animation: warningShift 20s linear infinite;
+        }
+        
+        @keyframes warningShift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(102px); }
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header__logo a {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow-gold);
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
-        .accordion {
-            margin-bottom: 14px;
-            border-radius: 10px;
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav__link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
-        .accordion summary {
-            background: #23272a;
-            color: #ffd77a;
+        
+        .nav__link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav__link:hover::before {
+            left: 100%;
+        }
+        
+        .nav__link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .donate-link {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)) !important;
+            color: white !important;
+            box-shadow: var(--glow-purple);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+            padding-bottom: 4rem;
+        }
+        
+        .rules-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid var(--border-subtle);
+            padding: 4rem 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-intense);
+            position: relative;
+            overflow: hidden;
+            animation: containerEntrance 1.2s ease-out;
+        }
+        
+        @keyframes containerEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .rules-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange), var(--accent-gold));
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .rules-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent-red), var(--accent-orange), var(--accent-gold));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            animation: gradientShift 4s ease-in-out infinite, titlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .rules-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Rules Accordion */
+        .rules-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .rule-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out both;
+            position: relative;
+        }
+        
+        .rule-section:nth-child(1) { 
+            animation-delay: 0.1s;
+            --section-color: var(--accent-cyan);
+            --section-glow: var(--glow-cyan);
+        }
+        .rule-section:nth-child(2) { 
+            animation-delay: 0.2s;
+            --section-color: var(--accent-purple);
+            --section-glow: var(--glow-purple);
+        }
+        .rule-section:nth-child(3) { 
+            animation-delay: 0.3s;
+            --section-color: var(--accent-orange);
+            --section-glow: 0 0 30px rgba(245, 158, 11, 0.3);
+        }
+        .rule-section:nth-child(4) { 
+            animation-delay: 0.4s;
+            --section-color: var(--accent-red);
+            --section-glow: var(--glow-red);
+        }
+        
+        .rule-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--section-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .rule-section:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .rule-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-intense), var(--section-glow);
+            border-color: var(--section-color);
+        }
+        
+        .rule-section.open {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-intense), var(--section-glow);
+            border-color: var(--section-color);
+        }
+        
+        .rule-section.open::before {
+            transform: scaleX(1);
+        }
+        
+        .rule-header {
+            padding: 1.5rem 2rem;
             cursor: pointer;
-            padding: 14px 18px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            outline: none;
-            border: none;
-            user-select: none;
-            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .accordion[open] summary {
-            background: #ffd77a;
-            color: #23272a;
+        
+        .rule-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.5s;
         }
-        .accordion ul, .accordion ol {
-            margin: 0 0 0 25px;
-            padding: 10px 0 10px 0;
-            color: #fff;
+        
+        .rule-header:hover::before {
+            left: 100%;
         }
-        .accordion li {
-            margin-bottom: 8px;
-            line-height: 1.5;
+        
+        .rule-title-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .rule-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--section-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: var(--section-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rule-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: iconRotate 4s linear infinite;
+        }
+        
+        @keyframes iconRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rule-icon i {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .rule-title-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--section-color);
+        }
+        
+        .rule-chevron {
+            font-size: 1.2rem;
+            color: var(--section-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .rule-section.open .rule-chevron {
+            transform: rotate(180deg);
+        }
+        
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .rule-section.open .rule-content {
+            max-height: 2000px;
+            padding: 2rem;
+        }
+        
+        .rule-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            animation: slideInLeft 0.3s ease-out both;
+        }
+        
+        .rule-item:nth-child(1) { animation-delay: 0.1s; }
+        .rule-item:nth-child(2) { animation-delay: 0.15s; }
+        .rule-item:nth-child(3) { animation-delay: 0.2s; }
+        .rule-item:nth-child(4) { animation-delay: 0.25s; }
+        .rule-item:nth-child(5) { animation-delay: 0.3s; }
+        .rule-item:nth-child(6) { animation-delay: 0.35s; }
+        .rule-item:nth-child(7) { animation-delay: 0.4s; }
+        .rule-item:nth-child(8) { animation-delay: 0.45s; }
+        .rule-item:nth-child(9) { animation-delay: 0.5s; }
+        .rule-item:nth-child(10) { animation-delay: 0.55s; }
+        .rule-item:nth-child(11) { animation-delay: 0.6s; }
+        .rule-item:nth-child(12) { animation-delay: 0.65s; }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .rule-number {
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--section-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: var(--section-glow);
+        }
+        
+        .rule-text {
+            color: var(--text-secondary);
             font-size: 1rem;
+            line-height: 1.6;
         }
-        @media (max-width: 700px) {
-            .rules-block {
-                padding: 14px 2vw;
-                font-size: 0.95rem;
+        
+        .rule-text strong {
+            color: var(--text-primary);
+        }
+        
+        .sub-rule-list {
+            list-style: none;
+            margin: 1rem 0 0 2rem;
+            padding: 0;
+        }
+        
+        .sub-rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        
+        .sub-rule-number {
+            min-width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--section-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Warning Banner */
+        .warning-banner {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--glow-red);
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+        
+        .warning-icon {
+            font-size: 2rem;
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes warningPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .warning-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
             }
-            .rules-block h1 {
-                font-size: 1.2rem;
+            
+            .nav {
+                display: none;
             }
-            .accordion summary {
-                font-size: 1rem;
-                padding: 12px 10px;
+            
+            .rules-container {
+                padding: 2.5rem 2rem;
+                margin: 0 1rem;
+            }
+            
+            .rule-header {
+                padding: 1.25rem 1.5rem;
+            }
+            
+            .rule-section.open .rule-content {
+                padding: 1.5rem;
+            }
+            
+            .rule-title-text {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rules-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .rules-title {
+                font-size: 2rem;
+            }
+            
+            .rule-header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .rule-title-container {
+                flex-direction: column;
+            }
+            
+            .warning-banner {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+    
+    <!-- Warning Lines Effect -->
+    <div class="warning-lines"></div>
+    
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__inner">
                 <div class="header__logo">
-                    <a class="main" href="index.html">BoDa</a>
+                    <a href="index.html">BoDa</a>
                 </div>
                 <nav class="nav">
                     <a class="nav__link" href="contact.html">Контакты</a>
@@ -89,88 +681,676 @@
             </div>
         </div>
     </header>
-    <div class="intro" style="min-height:auto; padding-top:120px;">
+    
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="container">
-            <div class="rules-block">
-                <h1>Правила сервера</h1>
-
-                <details class="accordion">
-                    <summary>1. Общие положения</summary>
-                    <ul>
-                        <li>1.1 Незнание правил не освобождает вас от ответственности;</li>
-                        <li>1.2 Начав играть на наших серверах, Вы автоматически подтверждаете своё согласие с данным сводом правил;</li>
-                        <li>1.3 Администратор вправе наказать игрока по причине, не указанной в настоящих правилах;</li>
-                        <li>1.4 Администрация не несет ответственности за временную или постоянную невозможность игры на сервере конкретным лицом или группой лиц;</li>
-                        <li>1.5 Администрация не несет ответственности за потерю игровых ценностей в следствии нарушения работоспособности сервера или его плагинов;</li>
-                        <li>1.6 Администрация не гарантирует работоспособность сервера, а также сохранность информации на нем и продолжение работы над ним;</li>
-                        <li>1.7 Администрация сервера не гарантирует надёжную работу в предоставлении услуг и сервисов, а также не несёт ответственность за ущерб, который может быть причинён пользователям вследствие сбоев в линиях связи, ошибочного использования предоставляемых услуг, дефектов программного обеспечения или других действий, которые могут привести к возникновению нежелательных ситуаций;</li>
-                        <li>1.8 Игроки обязаны соблюдать все правила;</li>
-                        <li>1.9 Администрация ведет логи всех действий игроков на сервере и всех сообщений чата;</li>
-                        <li>1.10 Администрация имеет право корректировать данный свод правил без уведомления игрока;</li>
-                        <li>1.11 Оскорбление, провоцирование администрации запрещено.</li>
-                    </ul>
-                </details>
-
-                <details class="accordion">
-                    <summary>2. Правила чата</summary>
-                    <ul>
-                        <li>2.1 Запрещен Капс/Спам/Флуд в любом из чатов;</li>
-                        <li>2.2 Запрещены унижения, оскорбления игроков;</li>
-                        <li>2.3 Запрещена нецензурная лексика (маты, скрытые маты);</li>
-                        <li>2.4 Запрещено рекламировать/упоминать посторонние ресурсы, которые не связаны с проектом или его ресурсами;</li>
-                        <li>2.5 Чатами для рекламы/покупки/продажи разрешено пользоваться только в их тематичных целях;</li>
-                        <li>2.6 Запрещено упоминать/оскорблять родных и близких игроков;</li>
-                        <li>2.7 Запрещается розжиг межнациональной розни, подстрекательство на конфликт этой темы, расизм;</li>
-                        <li>2.8 Запрещено как-либо обходить блокировку чата;</li>
-                        <li>2.9 Запрещено вызывать игроков на проверку читов;</li>
-                        <li>2.10 Запрещено отправлять свои контактные данные (дискорд, вк и т.д.) в чатах (исключение: личные сообщения);</li>
-                        <li>2.11 Запрещено продавать ресурсы или услуги ВНЕ серверного чата, например через дискорд;</li>
-                        <li>2.12 Самопризнание в нарушении правил проекта является поводом для бана.</li>
-                    </ul>
-                </details>
-
-                <details class="accordion">
-                    <summary>3. Аккаунты и ники</summary>
-                    <ul>
-                        <li>3.1 Ник не должен содержать:
-                            <ul type="a">
-                                <li>3.1.1 Мата, скрытого мата, унижений, оскорблений;</li>
-                                <li>3.1.2 Схожесть с названием других проектов/чит клиентов;</li>
-                                <li>3.1.3 Схожесть с Администраторами, Ютуберами проекта;</li>
-                                <li>3.1.4 Схожесть с никами пользователей из ЧС Проекта;</li>
+            <div class="rules-container">
+                <h1 class="rules-title">ПРАВИЛА СЕРВЕРА</h1>
+                <p class="rules-subtitle">Обязательны к соблюдению всеми игроками</p>
+                
+                <!-- Warning Banner -->
+                <div class="warning-banner">
+                    <div class="warning-icon">⚠️</div>
+                    <div class="warning-text">
+                        Незнание правил не освобождает от ответственности! 
+                        Нарушение может привести к блокировке аккаунта.
+                    </div>
+                </div>
+                
+                <div class="rules-grid">
+                    <!-- General Rules -->
+                    <div class="rule-section">
+                        <div class="rule-header" onclick="toggleSection(this)">
+                            <div class="rule-title-container">
+                                <div class="rule-icon">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <div class="rule-title-text">1. Общие положения</div>
+                            </div>
+                            <div class="rule-chevron">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="rule-content">
+                            <ul class="rule-list">
+                                <li class="rule-item">
+                                    <div class="rule-number">1.1</div>
+                                    <div class="rule-text">Незнание правил не освобождает вас от ответственности</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.2</div>
+                                    <div class="rule-text">Начав играть на наших серверах, Вы автоматически подтверждаете своё согласие с данным сводом правил</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.3</div>
+                                    <div class="rule-text">Администратор вправе наказать игрока по причине, не указанной в настоящих правилах</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.4</div>
+                                    <div class="rule-text">Администрация не несет ответственности за временную или постоянную невозможность игры на сервере конкретным лицом или группой лиц</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.5</div>
+                                    <div class="rule-text">Администрация не несет ответственности за потерю игровых ценностей в следствии нарушения работоспособности сервера или его плагинов</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.6</div>
+                                    <div class="rule-text">Администрация не гарантирует работоспособность сервера, а также сохранность информации на нем и продолжение работы над ним</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.7</div>
+                                    <div class="rule-text">Администрация сервера не гарантирует надёжную работу в предоставлении услуг и сервисов, а также не несёт ответственность за ущерб, который может быть причинён пользователям вследствие сбоев в линиях связи</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.8</div>
+                                    <div class="rule-text">Игроки обязаны соблюдать все правила</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.9</div>
+                                    <div class="rule-text">Администрация ведет логи всех действий игроков на сервере и всех сообщений чата</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.10</div>
+                                    <div class="rule-text">Администрация имеет право корректировать данный свод правил без уведомления игрока</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">1.11</div>
+                                    <div class="rule-text"><strong>Оскорбление, провоцирование администрации запрещено</strong></div>
+                                </li>
                             </ul>
-                        </li>
-                        <li>3.2 Запрещается предоставлять свой аккаунт другим людям;</li>
-                        <li>3.3 Ответственность несет владелец аккаунта, независимо от того, кто совершал действия под данным аккаунтом;</li>
-                        <li>3.4 Запрещена продажа/передача аккаунтов, продажа привилегий;</li>
-                        <li>3.5 Донат невозможно перенести на другой аккаунт.</li>
-                    </ul>
-                </details>
-
-                <details class="accordion">
-                    <summary>4. Геймплей и поведение</summary>
-                    <ul>
-                        <li>4.1 Запрещено мошенничество, обман администрации;</li>
-                        <li>4.2 Запрещено продавать/покупать у игроков игровые ценности за реальную валюту;</li>
-                        <li>4.3 Запрещено пользоваться всем, что упрощает процесс игры, а именно:
-                            <ul type="a">
-                                <li>4.3.1 Сторонними программами, скриптами, читами, кликерами;</li>
-                                <li>4.3.2 Модами, запрещенными пунктом 4.12;</li>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Rules -->
+                    <div class="rule-section">
+                        <div class="rule-header" onclick="toggleSection(this)">
+                            <div class="rule-title-container">
+                                <div class="rule-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="rule-title-text">2. Правила чата</div>
+                            </div>
+                            <div class="rule-chevron">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="rule-content">
+                            <ul class="rule-list">
+                                <li class="rule-item">
+                                    <div class="rule-number">2.1</div>
+                                    <div class="rule-text"><strong>Запрещен Капс/Спам/Флуд</strong> в любом из чатов</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.2</div>
+                                    <div class="rule-text"><strong>Запрещены унижения, оскорбления игроков</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.3</div>
+                                    <div class="rule-text"><strong>Запрещена нецензурная лексика</strong> (маты, скрытые маты)</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.4</div>
+                                    <div class="rule-text">Запрещено рекламировать/упоминать посторонние ресурсы, которые не связаны с проектом или его ресурсами</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.5</div>
+                                    <div class="rule-text">Чатами для рекламы/покупки/продажи разрешено пользоваться только в их тематичных целях</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.6</div>
+                                    <div class="rule-text"><strong>Запрещено упоминать/оскорблять родных и близких игроков</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.7</div>
+                                    <div class="rule-text"><strong>Запрещается розжиг межнациональной розни</strong>, подстрекательство на конфликт этой темы, расизм</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.8</div>
+                                    <div class="rule-text">Запрещено как-либо обходить блокировку чата</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.9</div>
+                                    <div class="rule-text">Запрещено вызывать игроков на проверку читов</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.10</div>
+                                    <div class="rule-text">Запрещено отправлять свои контактные данные (дискорд, вк и т.д.) в чатах (исключение: личные сообщения)</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.11</div>
+                                    <div class="rule-text">Запрещено продавать ресурсы или услуги ВНЕ серверного чата, например через дискорд</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">2.12</div>
+                                    <div class="rule-text"><strong>Самопризнание в нарушении правил проекта является поводом для бана</strong></div>
+                                </li>
                             </ul>
-                        </li>
-                        <li>4.4 Запрещено как-либо помогать, укрывать нарушителя или способствовать в его неправомерных действиях;</li>
-                        <li>4.5 Запрещено играть на проекте, если Ваши аккаунты были неоднократно блокированы пунктом 4.3 и его подпунктам;</li>
-                        <li>4.6 Запрещено вызывание неполадок в работе сервера или попытки обрушить сервер, путем специально вызванных лагов или подобного;</li>
-                        <li>4.6.1 Запрещена постройка и запуск механизмов, приводящих к одновременной активации большого количества поршней. Для ферм на поршнях рекомендуется использовать наблюдатели, которые активируют малое количество поршней;</li>
-                        <li>4.7 Запрещено выдавать себя за Администрацию, устанавливать ники похожие на Администрацию или их префиксы;</li>
-                        <li>4.8 Запрещено использование/скрытие багов/недоработок сервера;</li>
-                        <li>4.9 Запрещено играть/взаимодействовать и помогать на режиме с игроками в количестве больше, чем разрешено на режиме.</li>
-                        <li>4.10 Запрещено строительство половых органов, нацистских символик, лавакастов;</li>
-                        <li>4.11 Запрещено подстрекать третьих лиц на нарушение правил;</li>
-                    </ul>
-                </details>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Rules -->
+                    <div class="rule-section">
+                        <div class="rule-header" onclick="toggleSection(this)">
+                            <div class="rule-title-container">
+                                <div class="rule-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="rule-title-text">3. Аккаунты и ники</div>
+                            </div>
+                            <div class="rule-chevron">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="rule-content">
+                            <ul class="rule-list">
+                                <li class="rule-item">
+                                    <div class="rule-number">3.1</div>
+                                    <div class="rule-text">
+                                        <strong>Ник не должен содержать:</strong>
+                                        <ul class="sub-rule-list">
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">3.1.1</div>
+                                                <div class="rule-text">Мата, скрытого мата, унижений, оскорблений</div>
+                                            </li>
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">3.1.2</div>
+                                                <div class="rule-text">Схожесть с названием других проектов/чит клиентов</div>
+                                            </li>
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">3.1.3</div>
+                                                <div class="rule-text">Схожесть с Администраторами, Ютуберами проекта</div>
+                                            </li>
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">3.1.4</div>
+                                                <div class="rule-text">Схожесть с никами пользователей из ЧС Проекта</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">3.2</div>
+                                    <div class="rule-text"><strong>Запрещается предоставлять свой аккаунт другим людям</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">3.3</div>
+                                    <div class="rule-text">Ответственность несет владелец аккаунта, независимо от того, кто совершал действия под данным аккаунтом</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">3.4</div>
+                                    <div class="rule-text"><strong>Запрещена продажа/передача аккаунтов, продажа привилегий</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">3.5</div>
+                                    <div class="rule-text">Донат невозможно перенести на другой аккаунт</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Gameplay Rules -->
+                    <div class="rule-section">
+                        <div class="rule-header" onclick="toggleSection(this)">
+                            <div class="rule-title-container">
+                                <div class="rule-icon">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                                <div class="rule-title-text">4. Геймплей и поведение</div>
+                            </div>
+                            <div class="rule-chevron">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="rule-content">
+                            <ul class="rule-list">
+                                <li class="rule-item">
+                                    <div class="rule-number">4.1</div>
+                                    <div class="rule-text"><strong>Запрещено мошенничество, обман администрации</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.2</div>
+                                    <div class="rule-text"><strong>Запрещено продавать/покупать у игроков игровые ценности за реальную валюту</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.3</div>
+                                    <div class="rule-text">
+                                        <strong>Запрещено пользоваться всем, что упрощает процесс игры:</strong>
+                                        <ul class="sub-rule-list">
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">4.3.1</div>
+                                                <div class="rule-text">Сторонними программами, скриптами, читами, кликерами</div>
+                                            </li>
+                                            <li class="sub-rule-item">
+                                                <div class="sub-rule-number">4.3.2</div>
+                                                <div class="rule-text">Модами, запрещенными пунктом 4.12</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.4</div>
+                                    <div class="rule-text">Запрещено как-либо помогать, укрывать нарушителя или способствовать в его неправомерных действиях</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.5</div>
+                                    <div class="rule-text">Запрещено играть на проекте, если Ваши аккаунты были неоднократно блокированы пунктом 4.3 и его подпунктам</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.6</div>
+                                    <div class="rule-text"><strong>Запрещено вызывание неполадок в работе сервера</strong> или попытки обрушить сервер, путем специально вызванных лагов или подобного</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.6.1</div>
+                                    <div class="rule-text">Запрещена постройка и запуск механизмов, приводящих к одновременной активации большого количества поршней</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.7</div>
+                                    <div class="rule-text"><strong>Запрещено выдавать себя за Администрацию</strong>, устанавливать ники похожие на Администрацию или их префиксы</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.8</div>
+                                    <div class="rule-text"><strong>Запрещено использование/скрытие багов/недоработок сервера</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.9</div>
+                                    <div class="rule-text">Запрещено играть/взаимодействовать и помогать на режиме с игроками в количестве больше, чем разрешено на режиме</div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.10</div>
+                                    <div class="rule-text"><strong>Запрещено строительство половых органов, нацистских символик, лавакастов</strong></div>
+                                </li>
+                                <li class="rule-item">
+                                    <div class="rule-number">4.11</div>
+                                    <div class="rule-text">Запрещено подстрекать третьих лиц на нарушение правил</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer Message -->
+                <div class="rules-footer">
+                    <div class="footer-card">
+                        <div class="footer-icon">⚖️</div>
+                        <h3>Помните!</h3>
+                        <p>
+                            Соблюдение правил - залог комфортной игры для всех! 
+                            При возникновении вопросов обращайтесь к администрации в Discord.
+                        </p>
+                        <p class="highlight-text">
+                            Желаем приятной игры на BoDa сервере! 🎮
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+    
+    <script>
+        // Toggle accordion sections
+        function toggleSection(header) {
+            const section = header.parentElement;
+            const isOpen = section.classList.contains('open');
+            
+            // Close all sections
+            document.querySelectorAll('.rule-section').forEach(s => {
+                s.classList.remove('open');
+            });
+            
+            // Open clicked section if it wasn't open
+            if (!isOpen) {
+                section.classList.add('open');
+                
+                // Reset animations for rule items
+                const ruleItems = section.querySelectorAll('.rule-item, .sub-rule-item');
+                ruleItems.forEach((item, index) => {
+                    item.style.animation = 'none';
+                    setTimeout(() => {
+                        item.style.animation = `slideInLeft 0.3s ease-out ${index * 0.05}s both`;
+                    }, 10);
+                });
+            }
+            
+            // Add ripple effect
+            addRippleEffect(header);
+        }
+        
+        // Add ripple effect to header clicks
+        function addRippleEffect(element) {
+            const ripple = document.createElement('span');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = rect.width / 2 - size / 2;
+            const y = rect.height / 2 - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            element.style.position = 'relative';
+            element.style.overflow = 'hidden';
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+        
+        // Create floating shapes
+        function createFloatingShapes() {
+            const shapesContainer = document.querySelector('.floating-shapes');
+            
+            for (let i = 3; i < 8; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+                
+                const size = Math.random() * 50 + 30;
+                const colors = [
+                    'linear-gradient(45deg, var(--accent-red), var(--accent-orange))',
+                    'linear-gradient(45deg, var(--accent-purple), var(--accent-pink))',
+                    'linear-gradient(45deg, var(--accent-gold), var(--accent-orange))'
+                ];
+                
+                const shapes = ['50%', '20px', 'polygon(50% 0%, 0% 100%, 100% 100%)'];
+                
+                shape.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: ${shapes[Math.floor(Math.random() * shapes.length)]};
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation-delay: ${-Math.random() * 30}s;
+                    animation-duration: ${Math.random() * 10 + 25}s;
+                `;
+                
+                shapesContainer.appendChild(shape);
+            }
+        }
+        
+        // Enhanced hover effects for rule sections
+        function initRuleEffects() {
+            const sections = document.querySelectorAll('.rule-section');
+            
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', () => {
+                    if (!section.classList.contains('open')) {
+                        section.style.transform = 'translateY(-8px) scale(1.01)';
+                    }
+                });
+                
+                section.addEventListener('mouseleave', () => {
+                    if (!section.classList.contains('open')) {
+                        section.style.transform = '';
+                    }
+                });
+                
+                // Add mouse move parallax effect
+                section.addEventListener('mousemove', (e) => {
+                    if (!section.classList.contains('open')) {
+                        const rect = section.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = (y - centerY) / 30;
+                        const rotateY = (centerX - x) / 30;
+                        
+                        section.style.transform = `translateY(-8px) scale(1.01) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    }
+                });
+                
+                section.addEventListener('mouseleave', () => {
+                    if (!section.classList.contains('open')) {
+                        section.style.transform = '';
+                    }
+                });
+            });
+        }
+        
+        // Header scroll effect
+        function initHeaderEffect() {
+            const header = document.querySelector('.header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.background = 'rgba(10, 10, 10, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(10, 10, 10, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+        
+        // Add glitch effect to title
+        function initTextEffects() {
+            const title = document.querySelector('.rules-title');
+            
+            setInterval(() => {
+                if (Math.random() < 0.03) { // 3% chance
+                    title.style.textShadow = `
+                        3px 0 #ff0000,
+                        -3px 0 #00ffff,
+                        0 0 25px rgba(239, 68, 68, 0.8)
+                    `;
+                    title.style.transform = 'skew(-1deg)';
+                    
+                    setTimeout(() => {
+                        title.style.textShadow = '';
+                        title.style.transform = '';
+                    }, 150);
+                }
+            }, 4000);
+        }
+        
+        // Performance optimization
+        function optimizePerformance() {
+            if (window.innerWidth < 768) {
+                const shapes = document.querySelectorAll('.shape');
+                shapes.forEach((shape, index) => {
+                    if (index > 3) {
+                        shape.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
+        // Add CSS for ripple animation
+        function addRippleCSS() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    from {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Easter egg - Konami code
+        function initEasterEgg() {
+            let konamiCode = [];
+            const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+            
+            document.addEventListener('keydown', (e) => {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > konamiSequence.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.join(',') === konamiSequence.join(',')) {
+                    // Easter egg: Rules rainbow mode
+                    document.body.style.filter = 'hue-rotate(0deg)';
+                    let hue = 0;
+                    const interval = setInterval(() => {
+                        hue += 2;
+                        document.body.style.filter = `hue-rotate(${hue}deg)`;
+                        if (hue >= 360) {
+                            clearInterval(interval);
+                            document.body.style.filter = '';
+                        }
+                    }, 50);
+                    
+                    // Show admin message
+                    const message = document.createElement('div');
+                    message.innerHTML = '👑 Администраторский режим активирован! 👑';
+                    message.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: linear-gradient(45deg, var(--accent-red), var(--accent-gold));
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 20px;
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        z-index: 10000;
+                        animation: bounce 0.5s ease-in-out;
+                        box-shadow: var(--shadow-intense);
+                        font-family: 'Orbitron', monospace;
+                        text-align: center;
+                    `;
+                    
+                    document.body.appendChild(message);
+                    setTimeout(() => {
+                        message.remove();
+                    }, 4000);
+                    
+                    konamiCode = [];
+                }
+            });
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            addRippleCSS();
+            createFloatingShapes();
+            initRuleEffects();
+            initHeaderEffect();
+            initTextEffects();
+            optimizePerformance();
+            initEasterEgg();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            optimizePerformance();
+        });
+        
+        // Add visibility change listener
+        document.addEventListener('visibilitychange', () => {
+            const shapes = document.querySelectorAll('.shape');
+            
+            if (document.hidden) {
+                shapes.forEach(shape => {
+                    shape.style.animationPlayState = 'paused';
+                });
+            } else {
+                shapes.forEach(shape => {
+                    shape.style.animationPlayState = 'running';
+                });
+            }
+        });
+    </script>
+    
+    <style>
+        .rules-footer {
+            margin-top: 4rem;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+        
+        .footer-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-green), var(--accent-cyan));
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        .footer-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .footer-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+        }
+        
+        .footer-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .highlight-text {
+            color: var(--accent-gold) !important;
+            font-weight: 600;
+            font-size: 1.2rem !important;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+            40% {
+                transform: translate(-50%, -50%) translateY(-30px);
+            }
+            60% {
+                transform: translate(-50%, -50%) translateY(-15px);
+            }
+        }
+    </style>
 </body>
 </html>

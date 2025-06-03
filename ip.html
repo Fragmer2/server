@@ -3,192 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BoDa | Главная</title>
+    <title>BoDa | IP сервера</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/images/bread.png">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #fff;
-            background: #181a1b;
-            min-height: 100vh;
-        }
-        *,
-        *:before,
-        *:after {
-            box-sizing: border-box;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-            font-weight: 700;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-        /* Header */
-        .header {
-            background: rgba(20, 20, 20, 0.90);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .header__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 0;
-        }
-        .header__logo .main {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffd77a;
-            text-decoration: none;
-            text-shadow: 2px 2px 8px #000;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: color 0.2s;
-        }
-        .header__logo .main:hover {
-            color: #fff;
-        }
-        .nav {
-            display: flex;
-            gap: 18px;
-        }
-        .nav__link {
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
-            font-weight: 500;
-            font-size: 1rem;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-        }
-        .nav__link:hover,
-        .donate-link {
-            background: #ffd77a;
-            color: #181a1b;
-        }
-        /* Intro section */
-        .intro {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: url("assets/images/bunun.png") center/cover no-repeat;
-            text-align: center;
-            padding-top: 90px;
-        }
-        .intro__inner {
-            background: rgba(0,0,0,0.60);
-            border-radius: 22px;
-            padding: 54px 32px 40px 32px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.4);
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .intro__inner h1 {
-            font-size: 2.3rem;
-            margin-bottom: 22px;
-            color: #ffd77a;
-            text-shadow: 2px 2px 8px #000;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-        }
-        .intro__inner p {
-            font-size: 1.15rem;
-            margin-bottom: 28px;
-            color: #fff;
-            text-shadow: 1px 1px 6px #000;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-        }
-        /* Кнопки */
-        .btn,
-        .donate-btn {
-            display: inline-block;
-            margin: 12px 8px 0 8px;
-            padding: 15px 38px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #fff;
-            background: linear-gradient(90deg, #f7b733 0%, #fc4a1a 100%);
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.22);
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            font-family: 'Rubik', 'Ubuntu', sans-serif;
-        }
-        .btn:hover,
-        .donate-btn:hover {
-            background: linear-gradient(90deg, #ffd77a 0%, #fc4a1a 100%);
-            color: #181a1b;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.32);
-        }
-        /* Мобильная адаптация */
-        @media (max-width: 900px) {
-            .header__inner {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 0;
-            }
-            .nav {
-                flex-direction: column;
-                gap: 8px;
-                width: 100%;
-                margin-top: 8px;
-            }
-            .intro__inner {
-                padding: 22px 8px;
-                max-width: 98vw;
-            }
-            .btn, .donate-btn {
-                width: 100%;
-                margin: 10px 0 0 0;
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .header__logo .main {
-                font-size: 1.3rem;
-            }
-            .intro__inner h1 {
-                font-size: 1.4rem;
-            }
-            .intro__inner {
-                padding: 16px 3vw;
-            }
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-            background: #23272a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ffd77a;
-            border-radius: 4px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/images/sword.png">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="header__inner">
-                <div class="header__logo">
-                    <a class="main" href="index.html">Boda</a>
-                </div>
+                <div class="header__logo"><a class="main" href="index.html">BoDa</a></div>
                 <nav class="nav">
                     <a class="nav__link" href="contact.html">Контакты</a>
                     <a class="nav__link donate-link" href="donate.html">Донат</a>
@@ -202,9 +26,9 @@
     <div class="intro">
         <div class="container">
             <div class="intro__inner">
-                <h1>Добро пожаловать на сервер Boda!</h1>
-                <a class="btn" href="ip.html">Начать Играть</a>
-                <a class="btn donate-btn" href="donate.html">Купить Донат</a>
+                <h1>IP сервера: <span style="color:#ffd77a;">xxx.xxxxx.xxx</span></h1>
+				<p>IP: <b>xxx.xxxxx.xxx</b> | Версия: <b>1.20.6</b></p>
+                <p>Можешь посетить наш дискорд сервер <a href="https://discord.gg/AAZkJBPeva" target="_blank" style="color:#ffd77a;">Discord</a>!</p>
             </div>
         </div>
     </div>
